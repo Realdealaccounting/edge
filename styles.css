@@ -877,7 +877,7 @@ body.sharp .tw-avatar { border-radius: 8px; }
 .elig-card { background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); border-radius: var(--r-lg); padding: 34px 30px; text-align:center; backdrop-filter: blur(6px); }
 .elig-card .ec-ico { width: 54px; height:54px; border-radius:15px; background: rgba(109,69,201,.25); color: var(--emerald-300); display:grid; place-items:center; margin: 0 auto 18px; }
 .elig-card .ec-ico svg { width:26px; height:26px; }
-.elig-card b { display:block; font-size: clamp(1.8rem,3.2vw,2.4rem); font-weight:800; letter-spacing:-.03em; color:#fff; }
+.elig-card b { display:block; font-size: clamp(1.8rem,3.2vw,2.4rem); font-weight:800; letter-spacing:-.03em; color:#1E1033; }
 .elig-card span { font-size: 14.5px; color: rgba(30,16,51,.68); }
 .elig-or { display:grid; place-items:center; font-size: 13px; font-weight:800; letter-spacing:.1em; color: var(--emerald-300); }
 .elig-or .line { width:1px; flex:1; background: rgba(255,255,255,.18); }
