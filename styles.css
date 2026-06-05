@@ -916,3 +916,18 @@ body.sharp .tw-avatar { border-radius: 8px; }
 .cpa-node span { font-size: 13px; color: var(--text-soft); }
 .cpa-connector { width:2px; height: 26px; background: var(--gray-200); margin-left: 41px; }
 @media (max-width: 880px){ .cpa-grid { grid-template-columns: 1fr; } }
+.brand-logo.light {
+  display: block;
+}
+
+.brand-logo.dark {
+  display: none;
+}
+
+.nav.scrolled .brand-logo.light {
+  display: none;
+}
+
+.nav.scrolled .brand-logo.dark {
+  display: block;
+}
