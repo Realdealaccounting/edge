@@ -184,10 +184,10 @@ img { display: block; max-width: 100%; }
 .brand-logo { height: 38px; width: auto; display: block; transition: height .35s ease; }
 .nav.scrolled .brand-logo { height: 32px; }
 /* show light logo only on transparent dark nav; dark logo otherwise (scrolled/light) */
-.brand-logo.light { display: none; }
-.brand-logo.dark { display: block; }
-.nav.on-dark:not(.scrolled) .brand-logo.light { display: block; }
-.nav.on-dark:not(.scrolled) .brand-logo.dark { display: none; }
+.brand-logo.light { display: block; }
+.brand-logo.dark { display: none; }
+.nav.on-dark:not(.scrolled) .brand-logo.light { display: none; }
+.nav.on-dark:not(.scrolled) .brand-logo.dark { display: block; }
 .footer .brand-logo { height: 52px; }
 .footer .brand-logo.light { display: block; }
 .brand-mark {
