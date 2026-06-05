@@ -185,9 +185,9 @@ img { display: block; max-width: 100%; }
 .nav.scrolled .brand-logo { height: 32px; }
 /* show light logo only on transparent dark nav; dark logo otherwise (scrolled/light) */
 .brand-logo.light { display: block; }
-.brand-logo.dark { display: none; }
+.dark logo.png { display: none; }
 .navbar.scrolled .brand-logo.light { display: none; }
-.navbar.scrolled .brand-logo.dark { display: block; }
+.navbar.scrolled dark logo.png { display: block; }
 .footer .brand-logo { height: 52px; }
 .footer .brand-logo.light { display: block; }
 .brand-mark {
