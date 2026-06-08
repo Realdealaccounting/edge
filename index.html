@@ -994,124 +994,149 @@
 <script type="text/babel" src="tweaks-panel.jsx"></script>
 <script type="text/babel" src="tweaks-app.jsx"></script>
 <script>
-window.addEventListener('scroll', function () {
-  const nav = document.querySelector('.nav');
+(function () {
+  function init() {
 
-  if (nav) {
-    if (window.scrollY > 50) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
+    /* ---------- NAV SCROLL ---------- */
+    window.addEventListener('scroll', function () {
+      var nav = document.querySelector('.nav');
+      if (!nav) return;
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    /* Clone a node to drop any listeners script.js attached (prevents conflicts) */
+    function strip(el) {
+      if (!el || !el.parentNode) return el;
+      var clone = el.cloneNode(true);
+      el.parentNode.replaceChild(clone, el);
+      return clone;
+    }
+    function setErr(field, show) {
+      if (!field) return;
+      field.classList.toggle('invalid', !!show);
+      var msg = field.querySelector('.err-msg');
+      if (msg) msg.style.display = show ? 'block' : '';
+    }
+    function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+    /* ================= CONTACT FORM ================= */
+    var contactForm = strip(document.getElementById('contactForm'));
+    if (contactForm) {
+      var contactSubmitting = false;
+      contactForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        if (contactSubmitting) return;
+        contactSubmitting = true;
+        var btn = contactForm.querySelector('button[type="submit"]');
+        if (btn) btn.disabled = true;
+        try {
+          var res = await fetch(contactForm.action, {
+            method: 'POST',
+            body: new FormData(contactForm),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (!res.ok) throw new Error('bad response');
+          contactForm.style.display = 'none';
+          var ok = document.querySelector('.form-success');
+          if (ok) ok.style.display = 'block';
+        } catch (err) {
+          contactSubmitting = false;
+          if (btn) btn.disabled = false;
+          alert('There was a problem sending your message. Please try again.');
+        }
+      });
+    }
+
+    /* ================= QUOTE FORM (multi-step) ================= */
+    var quoteForm = strip(document.getElementById('quoteForm'));
+    if (quoteForm) {
+      var panels   = Array.prototype.slice.call(quoteForm.querySelectorAll('.qpanel'));
+      var qNext    = quoteForm.querySelector('#qNext');
+      var qBack    = quoteForm.querySelector('#qBack');
+      var qSubmit  = quoteForm.querySelector('#qSubmit');
+      var qCount   = quoteForm.querySelector('#qCount');
+      var qSuccess = document.getElementById('qSuccess');
+      var pSteps   = document.querySelectorAll('#qProg .pstep');
+      var total    = panels.length;
+      var current  = 0;
+      var quoteSubmitting = false;
+
+      function showStep(i) {
+        current = i;
+        panels.forEach(function (p, idx) { p.classList.toggle('active', idx === i); });
+        if (pSteps) pSteps.forEach(function (s, idx) { s.classList.toggle('active', idx <= i); });
+        if (qBack)  qBack.style.visibility = (i === 0) ? 'hidden' : 'visible';
+        if (qCount) qCount.textContent = 'Step ' + (i + 1) + ' of ' + total;
+      }
+
+      function validateStep(i) {
+        var ok = true;
+        if (i === 0) {
+          var name  = document.getElementById('q-name');
+          var email = document.getElementById('q-email');
+          var phone = document.getElementById('q-phone');
+          if (name)  { var b = !name.value.trim();           setErr(name.closest('.field'),  b); if (b) ok = false; }
+          if (email) { var c = !isEmail(email.value.trim()); setErr(email.closest('.field'), c); if (c) ok = false; }
+          if (phone) { var d = !phone.value.trim();          setErr(phone.closest('.field'), d); if (d) ok = false; }
+        }
+        if (i === 2) {
+          var picked = quoteForm.querySelectorAll('input[name="services"]:checked').length;
+          var svcErr = document.getElementById('svcErr');
+          if (svcErr) svcErr.style.display = picked ? '' : 'block';
+          if (!picked) ok = false;
+        }
+        return ok;
+      }
+
+      if (qNext) qNext.addEventListener('click', function () {
+        if (!validateStep(current)) return;
+        if (current < total - 1) showStep(current + 1);
+        else if (qSubmit) qSubmit.click();
+      });
+
+      if (qBack) qBack.addEventListener('click', function () {
+        if (current > 0) showStep(current - 1);
+      });
+
+      quoteForm.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') e.preventDefault();
+      });
+
+      quoteForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        if (current < total - 1) return;
+        if (!validateStep(current)) return;
+        if (quoteSubmitting) return;
+        quoteSubmitting = true;
+        if (qNext)   qNext.disabled = true;
+        if (qSubmit) qSubmit.disabled = true;
+        try {
+          var res = await fetch(quoteForm.action, {
+            method: 'POST',
+            body: new FormData(quoteForm),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (!res.ok) throw new Error('bad response');
+          quoteForm.style.display = 'none';
+          if (qSuccess) qSuccess.style.display = 'block';
+        } catch (err) {
+          quoteSubmitting = false;
+          if (qNext)   qNext.disabled = false;
+          if (qSubmit) qSubmit.disabled = false;
+          alert('There was a problem submitting your quote request. Please try again.');
+        }
+      });
+
+      showStep(0);
     }
   }
-});
 
-const contactForm = document.getElementById("contactForm");
-
-if (contactForm) {
-  contactForm.addEventListener("submit", async function(e) {
-    e.preventDefault();
-
-    const data = new FormData(contactForm);
-
-    const response = await fetch(contactForm.action, {
-      method: "POST",
-      body: data,
-      headers: {
-        'Accept': 'application/json'
-      }
-    });
-
-    if (response.ok) {
-      contactForm.style.display = "none";
-
-      const successBox = document.querySelector(".form-success");
-      if (successBox) {
-        successBox.style.display = "block";
-      }
-
-    } else {
-      alert("There was a problem submitting the contact form.");
-    }
-  });
-}
-
-const quoteForm = document.getElementById("quoteForm");
-const qNext = document.getElementById("qNext");
-
-if (quoteForm && qNext) {
-
-  qNext.addEventListener("click", function () {
-
-    const activePanel = document.querySelector(".qpanel.active");
-    const step = activePanel ? activePanel.getAttribute("data-panel") : null;
-
-    if (step === "3") {
-      quoteForm.submit();
-    }
-
-  });
-
-  quoteForm.addEventListener("submit", async function(e) {
-
-    e.preventDefault();
-
-    const data = new FormData(quoteForm);
-
-    const response = await fetch(quoteForm.action, {
-      method: "POST",
-      body: data,
-      headers: {
-        'Accept': 'application/json'
-      }
-    });
-
-    if (response.ok) {
-
-      quoteForm.innerHTML = `
-        <div class="success-message">
-          <h3>Thank you!</h3>
-          <p>Your quote request has been submitted successfully.</p>
-        </div>
-      `;
-
-    } else {
-
-      alert("There was a problem submitting the quote form.");
-
-    }
-  });
-}
-    e.preventDefault();
-
-    const data = new FormData(quoteForm);
-
-    const response = await fetch(quoteForm.action, {
-      method: "POST",
-      body: data,
-      headers: {
-        'Accept': 'application/json'
-      }
-    });
-
-    if (response.ok) {
-
-      quoteForm.innerHTML = `
-        <div class="success-message">
-          <h3>Thank you!</h3>
-          <p>Your quote request has been submitted successfully.</p>
-        </div>
-      `;
-
-    } else {
-
-      alert("There was a problem submitting the quote form.");
-
-    }
-  });
-}
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
 </script>
-```
-
 </body>
 </html>
