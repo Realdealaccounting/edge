@@ -1,1 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Get a Free Quote — Edge, powered by Real Deal Accounting</title>
+<meta name="description" content="Request a free, no-obligation cost segregation estimate from Edge — a Boca Raton firm specializing in engineering-based cost segregation studies." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<script src="image-slot.js"></script>
+</head>
+  <body>
+<!-- ============================ NAV ============================ -->
+<header class="nav on-dark" id="nav">
+  <div class="wrap nav-inner">
+    <a href="index.html#top" class="brand" aria-label="Edge, powered by Real Deal Accounting — home">
+  <img src="assets/light logo.png" class="brand-logo light" alt="Logo">
+<img src="assets/dark logo.png" class="brand-logo dark" alt="Logo">
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#what">Cost Seg</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#process">How It Works</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#team">Team</a>
+      <a href="index.html#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="contact.html" class="btn btn-ghost on-dark">Speak With Our Team</a>
+      <a href="quote.html" class="btn btn-primary" style="font-size: 15px; width: 200px">Get a Quote</a>
+    </div>
+    <button class="nav-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" aria-label="Close menu">&times;</button>
+  <a href="index.html#what">Cost Seg</a>
+  <a href="index.html#services">Services</a>
+  <a href="index.html#process">How It Works</a>
+  <a href="index.html#about">About</a>
+  <a href="index.html#team">Team</a>
+  <a href="index.html#faq">FAQ</a>
+  <a href="contact.html">Contact</a>
+  <a href="quote.html" class="btn btn-primary">Get a Quote</a>
+</div>
+<!-- ============================ PAGE HEADER BAND ============================ -->
+<section style="background:linear-gradient(135deg,#3B1576,#230C45);padding:150px 0 64px;text-align:center;color:#fff">
+  <div class="wrap">
+    <h1 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(30px,5vw,50px);line-height:1.1;margin:0 0 14px">Get Your Free Estimate</h1>
+    <p style="max-width:620px;margin:0 auto;font-size:18px;line-height:1.6;opacity:.85">A few quick questions and we'll send a no-cost estimate of the depreciation and tax savings a cost segregation study could unlock — no obligation.</p>
+  </div>
+</section>
+<!-- ============================ GET A QUOTE ============================ -->
+<section class="section quote-section" id="quote">
+  <div class="wrap quote-grid">
+    <aside class="quote-aside">
+      <span class="eyebrow">Free estimate</span>
+      <h2 class="h2" style="margin-top:16px">Tell us about your property</h2>
+      <p class="lead">Answer a few quick questions and we'll send a no-cost estimate of the depreciation and tax savings a cost segregation study could unlock — no obligation.</p>
+      <ol class="quote-steps-list">
+        <li><span class="qn">1</span><div><h5>About you</h5><p>How to reach you and your company name.</p></div></li>
+        <li><span class="qn">2</span><div><h5>Your property</h5><p>Type, value, and when you acquired it.</p></div></li>
+        <li><span class="qn">3</span><div><h5>Your goals</h5><p>What you're looking for and your timeline.</p></div></li>
+      </ol>
+      <div class="quote-trust">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Your information is private and never shared.
+      </div>
+    </aside>
+    <div class="qform-card">
+      <!-- progress -->
+      <div class="q-prog" id="qProg">
+        <div class="pstep active" data-step="1"><span class="pdot">1</span><span class="plabel">About you</span></div>
+        <div class="pline"></div>
+        <div class="pstep" data-step="2"><span class="pdot">2</span><span class="plabel">Your property</span></div>
+        <div class="pline"></div>
+        <div class="pstep" data-step="3"><span class="pdot">3</span><span class="plabel">Your goals</span></div>
+      </div>
+   <form id="quoteForm" action="https://formspree.io/f/mzdqrjjo" method="POST">
+        <!-- STEP 1 -->
+        <div class="qpanel active" data-panel="1">
+          <h3>About you</h3>
+          <p class="qsub">We'll use this to send your quote and follow up.</p>
+          <div class="form-row">
+            <div class="field">
+              <label for="q-name">Full name *</label>
+              <input type="text" id="q-name" name="name" placeholder="Jane Doe" />
+              <span class="err-msg">Please enter your name.</span>
+            </div>
+            <div class="field">
+              <label for="q-company">Company / entity name</label>
+              <input type="text" id="q-company" name="company" placeholder="Acme Holdings LLC" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="q-email">Email *</label>
+              <input type="email" id="q-email" name="email" placeholder="jane@company.com" />
+              <span class="err-msg">Please enter a valid email.</span>
+            </div>
+            <div class="field">
+              <label for="q-phone">Phone *</label>
+              <input type="tel" id="q-phone" name="phone" placeholder="(561) 000-0000" />
+              <span class="err-msg">Please enter your phone number.</span>
+            </div>
+          </div>
+          <div class="q-block">
+            <span class="q-grouplabel">Preferred contact method</span>
+            <div class="q-opts cols-3">
+              <div class="q-opt radio"><input type="radio" id="cm-email" name="contactMethod" value="Email" checked /><label for="cm-email"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Email</label></div>
+              <div class="q-opt radio"><input type="radio" id="cm-phone" name="contactMethod" value="Phone" /><label for="cm-phone"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Phone</label></div>
+              <div class="q-opt radio"><input type="radio" id="cm-either" name="contactMethod" value="Either" /><label for="cm-either"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Either</label></div>
+            </div>
+          </div>
+        </div>
+        <!-- STEP 2 -->
+        <div class="qpanel" data-panel="2">
+          <h3>Your property</h3>
+          <p class="qsub">This helps us estimate your potential tax savings.</p>
+          <div class="q-block">
+            <span class="q-grouplabel">Property type</span>
+            <div class="q-opts cols-3">
+              <div class="q-opt radio"><input type="radio" id="pt-multi" name="propType" value="Multifamily / Apartments" /><label for="pt-multi"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Multifamily</label></div>
+              <div class="q-opt radio"><input type="radio" id="pt-comm" name="propType" value="Commercial" /><label for="pt-comm"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Commercial</label></div>
+              <div class="q-opt radio"><input type="radio" id="pt-retail" name="propType" value="Retail / Office" /><label for="pt-retail"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Retail / Office</label></div>
+              <div class="q-opt radio"><input type="radio" id="pt-indus" name="propType" value="Industrial / Warehouse" /><label for="pt-indus"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Industrial</label></div>
+              <div class="q-opt radio"><input type="radio" id="pt-str" name="propType" value="Short-term rental" /><label for="pt-str"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Short-term rental</label></div>
+              <div class="q-opt radio"><input type="radio" id="pt-sfr" name="propType" value="Single-family rental" /><label for="pt-sfr"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Single-family</label></div>
+            </div>
+          </div>
+          <div class="q-block">
+            <span class="q-grouplabel">Property value (purchase price or cost basis)</span>
+            <div class="q-opts cols-3">
+              <div class="q-opt radio"><input type="radio" id="pv-1" name="value" value="Under $500K" /><label for="pv-1"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Under $500K</label></div>
+              <div class="q-opt radio"><input type="radio" id="pv-2" name="value" value="$500K – $1M" /><label for="pv-2"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>$500K – $1M</label></div>
+              <div class="q-opt radio"><input type="radio" id="pv-3" name="value" value="$1M – $5M" /><label for="pv-3"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>$1M – $5M</label></div>
+              <div class="q-opt radio"><input type="radio" id="pv-4" name="value" value="$5M – $20M" /><label for="pv-4"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>$5M – $20M</label></div>
+              <div class="q-opt radio"><input type="radio" id="pv-5" name="value" value="$20M+" /><label for="pv-5"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>$20M+</label></div>
+            </div>
+          </div>
+          <div class="q-block">
+            <span class="q-grouplabel">When did you acquire or renovate it?</span>
+            <div class="q-opts cols-3">
+              <div class="q-opt radio"><input type="radio" id="aq-soon" name="acquired" value="Buying / building soon" /><label for="aq-soon"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Soon / in progress</label></div>
+              <div class="q-opt radio"><input type="radio" id="aq-year" name="acquired" value="Within the last year" /><label for="aq-year"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Past year</label></div>
+              <div class="q-opt radio"><input type="radio" id="aq-prior" name="acquired" value="1+ years ago" /><label for="aq-prior"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>1+ years ago</label></div>
+            </div>
+          </div>
+          <div class="q-block">
+            <span class="q-grouplabel">How many properties?</span>
+            <div class="q-opts cols-3">
+              <div class="q-opt radio"><input type="radio" id="pc-1" name="propCount" value="Just one" /><label for="pc-1"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Just one</label></div>
+              <div class="q-opt radio"><input type="radio" id="pc-2" name="propCount" value="2–5" /><label for="pc-2"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>2–5</label></div>
+              <div class="q-opt radio"><input type="radio" id="pc-3" name="propCount" value="6 or more" /><label for="pc-3"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>6 or more</label></div>
+            </div>
+          </div>
+        </div>
+        <!-- STEP 3 -->
+        <div class="qpanel" data-panel="3">
+          <h3>Your goals</h3>
+          <p class="qsub">Tell us what you're after — select all that apply.</p>
+          <div class="q-block">
+            <span class="q-grouplabel">What are you interested in? <span class="opt">(select one or more)</span></span>
+            <div class="q-opts cols-2">
+              <div class="q-opt"><input type="checkbox" id="sv-study" name="services" value="Cost segregation study" /><label for="sv-study"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Cost segregation study</label></div>
+              <div class="q-opt"><input type="checkbox" id="sv-feas" name="services" value="Free feasibility analysis" /><label for="sv-feas"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Free feasibility analysis</label></div>
+              <div class="q-opt"><input type="checkbox" id="sv-look" name="services" value="Look-back study (prior years)" /><label for="sv-look"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Look-back study (prior years)</label></div>
+              <div class="q-opt"><input type="checkbox" id="sv-bonus" name="services" value="Bonus depreciation guidance" /><label for="sv-bonus"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Bonus depreciation guidance</label></div>
+              <div class="q-opt"><input type="checkbox" id="sv-multi" name="services" value="Portfolio / multiple properties" /><label for="sv-multi"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Portfolio / multiple properties</label></div>
+              <div class="q-opt"><input type="checkbox" id="sv-unsure" name="services" value="Not sure yet" /><label for="sv-unsure"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Not sure — help me figure it out</label></div>
+            </div>
+            <span class="err-msg" id="svcErr">Please select at least one option.</span>
+          </div>
+          <div class="q-block">
+            <span class="q-grouplabel">Do you have a CPA?</span>
+            <div class="q-opts cols-3">
+              <div class="q-opt radio"><input type="radio" id="cpa-yes" name="cpa" value="Yes, I have a CPA" /><label for="cpa-yes"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Yes</label></div>
+              <div class="q-opt radio"><input type="radio" id="cpa-no" name="cpa" value="No CPA yet" /><label for="cpa-no"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>No</label></div>
+              <div class="q-opt radio"><input type="radio" id="cpa-ref" name="cpa" value="Would like a referral" /><label for="cpa-ref"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Need one</label></div>
+            </div>
+          </div>
+          <div class="q-block">
+            <span class="q-grouplabel">Timeline</span>
+            <div class="q-opts cols-2">
+              <div class="q-opt radio"><input type="radio" id="tl-asap" name="timeline" value="As soon as possible" /><label for="tl-asap"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Before my next filing</label></div>
+              <div class="q-opt radio"><input type="radio" id="tl-30" name="timeline" value="Within 30 days" /><label for="tl-30"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Within 30 days</label></div>
+              <div class="q-opt radio"><input type="radio" id="tl-quarter" name="timeline" value="1–3 months" /><label for="tl-quarter"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>1–3 months</label></div>
+              <div class="q-opt radio"><input type="radio" id="tl-explore" name="timeline" value="Just exploring" /><label for="tl-explore"><span class="qcheck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Just exploring</label></div>
+            </div>
+          </div>
+          <div class="field">
+            <label for="q-notes">Anything else we should know? <span style="color:var(--ink-400);font-weight:500">(optional)</span></label>
+            <textarea id="q-notes" name="notes" placeholder="Property address, renovation details, deadlines, number of properties, etc."></textarea>
+          </div>
+        </div>
+        <!-- actions -->
+        <div class="q-actions">
+          <button type="button" class="btn-back" id="qBack" style="visibility:hidden">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H5M11 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Back
+          </button>
+          <span class="spacer"></span>
+          <span class="q-stepcount" id="qCount">Step 1 of 3</span>
+          <button type="button" class="btn btn-primary" id="qNext">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button type="submit" id="qSubmit" style="display:none" aria-hidden="true" tabindex="-1">Submit</button>
+        </div>
+      </form>
+      <!-- success -->
+      <div class="qsuccess" id="qSuccess">
+        <div class="qs-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Your quote request is in!</h3>
+        <p>Thanks — a member of the Edge team will review your property details and send your free cost segregation estimate within one business day.</p>
+        <div class="qs-summary" id="qSummary"></div>
+        <a href="index.html" class="btn btn-primary">Back to home</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============================ FOOTER ============================ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html#top" class="brand">
+          <img class="brand-logo light" src="assets/logo-light.png" alt="Edge — powered by Real Deal Accounting" style="height:52px" />
+        </a>
+        <p class="footer-blurb">A Boca Raton firm specializing in engineering-based cost segregation studies — helping real estate investors accelerate depreciation, cut their tax bill, and improve cash flow.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Cost Segregation</h5>
+        <ul>
+          <li><a href="index.html#what">What is cost seg?</a></li>
+          <li><a href="index.html#services">Engineering-based studies</a></li>
+          <li><a href="index.html#services">Accelerated depreciation</a></li>
+          <li><a href="index.html#services">Look-back studies</a></li>
+          <li><a href="index.html#eligibility">Eligibility</a></li>
+          <li><a href="index.html#process">How it works</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#why">Why Edge</a></li>
+          <li><a href="index.html#team">Our team</a></li>
+          <li><a href="index.html#testimonials">Clients</a></li>
+          <li><a href="contact.html#book">Book a consultation</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Get in touch</h5>
+        <ul>
+          <li><a href="tel:+15612704850">(561) 270-4850</a></li>
+          <li><a href="mailto:Clientservices@realdealaccounting.com">Email us</a></li>
+          <li><a href="contact.html">Boca Raton, FL</a></li>
+          <li><a href="contact.html">Mon–Fri · 9–5 ET</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="year">2026</span> Edge, powered by Real Deal Accounting. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0ZM.5 8.5h4V24h-4V8.5Zm7 0h3.8v2.1h.06c.53-1 1.83-2.1 3.76-2.1 4.02 0 4.76 2.65 4.76 6.1V24h-4v-6.5c0-1.55-.03-3.55-2.16-3.55-2.16 0-2.5 1.69-2.5 3.43V24h-4V8.5Z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V5h-3c-2.2 0-4 1.8-4 4v2H7v4h3v8h4v-8h3l1-4h-4V9c0-.6.4-1 1-1Z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="script.js"></script>
+<!-- ============================ FORMS + NAV (self-contained, conflict-proof) ============================ -->
+<script>
+(function () {
+  function init() {
 
+    /* ---------- NAV SCROLL ---------- */
+    window.addEventListener('scroll', function () {
+      var nav = document.querySelector('.nav');
+      if (!nav) return;
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    function strip(el) {
+      if (!el || !el.parentNode) return el;
+      var clone = el.cloneNode(true);
+      el.parentNode.replaceChild(clone, el);
+      return clone;
+    }
+    function setErr(field, show) {
+      if (!field) return;
+      field.classList.toggle('invalid', !!show);
+      var msg = field.querySelector('.err-msg');
+      if (msg) msg.style.display = show ? 'block' : '';
+    }
+    function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+    /* ================= CONTACT FORM ================= */
+    var contactForm = strip(document.getElementById('contactForm'));
+    if (contactForm) {
+      var contactSubmitting = false;
+      contactForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        if (contactSubmitting) return;
+        contactSubmitting = true;
+        var btn = contactForm.querySelector('button[type="submit"]');
+        if (btn) btn.disabled = true;
+        try {
+          var res = await fetch(contactForm.action, {
+            method: 'POST',
+            body: new FormData(contactForm),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (!res.ok) throw new Error('bad response');
+          contactForm.style.display = 'none';
+          var ok = document.querySelector('.form-success');
+          if (ok) ok.style.display = 'block';
+        } catch (err) {
+          contactSubmitting = false;
+          if (btn) btn.disabled = false;
+          alert('There was a problem sending your message. Please try again.');
+        }
+      });
+    }
+
+    /* ================= QUOTE FORM (multi-step) ================= */
+    var quoteForm = strip(document.getElementById('quoteForm'));
+    if (quoteForm) {
+      var panels   = Array.prototype.slice.call(quoteForm.querySelectorAll('.qpanel'));
+      var qNext    = quoteForm.querySelector('#qNext');
+      var qBack    = quoteForm.querySelector('#qBack');
+      var qSubmit  = quoteForm.querySelector('#qSubmit');
+      var qCount   = quoteForm.querySelector('#qCount');
+      var qSuccess = document.getElementById('qSuccess');
+      var pSteps   = document.querySelectorAll('#qProg .pstep');
+      var total    = panels.length;
+      var current  = 0;
+      var quoteSubmitting = false;
+
+      function showStep(i) {
+        current = i;
+        panels.forEach(function (p, idx) { p.classList.toggle('active', idx === i); });
+        if (pSteps) pSteps.forEach(function (s, idx) { s.classList.toggle('active', idx <= i); });
+        if (qBack)  qBack.style.visibility = (i === 0) ? 'hidden' : 'visible';
+        if (qCount) qCount.textContent = 'Step ' + (i + 1) + ' of ' + total;
+      }
+
+      function validateStep(i) {
+        var ok = true;
+        if (i === 0) {
+          var name  = document.getElementById('q-name');
+          var email = document.getElementById('q-email');
+          var phone = document.getElementById('q-phone');
+          if (name)  { var b = !name.value.trim();           setErr(name.closest('.field'),  b); if (b) ok = false; }
+          if (email) { var c = !isEmail(email.value.trim()); setErr(email.closest('.field'), c); if (c) ok = false; }
+          if (phone) { var d = !phone.value.trim();          setErr(phone.closest('.field'), d); if (d) ok = false; }
+        }
+        if (i === 2) {
+          var picked = quoteForm.querySelectorAll('input[name="services"]:checked').length;
+          var svcErr = document.getElementById('svcErr');
+          if (svcErr) svcErr.style.display = picked ? '' : 'block';
+          if (!picked) ok = false;
+        }
+        return ok;
+      }
+
+      if (qNext) qNext.addEventListener('click', function () {
+        if (!validateStep(current)) return;
+        if (current < total - 1) showStep(current + 1);
+        else if (qSubmit) qSubmit.click();
+      });
+
+      if (qBack) qBack.addEventListener('click', function () {
+        if (current > 0) showStep(current - 1);
+      });
+
+      quoteForm.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') e.preventDefault();
+      });
+
+      quoteForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        if (current < total - 1) return;
+        if (!validateStep(current)) return;
+        if (quoteSubmitting) return;
+        quoteSubmitting = true;
+        if (qNext)   qNext.disabled = true;
+        if (qSubmit) qSubmit.disabled = true;
+        try {
+          var res = await fetch(quoteForm.action, {
+            method: 'POST',
+            body: new FormData(quoteForm),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (!res.ok) throw new Error('bad response');
+          quoteForm.style.display = 'none';
+          if (qSuccess) qSuccess.style.display = 'block';
+        } catch (err) {
+          quoteSubmitting = false;
+          if (qNext)   qNext.disabled = false;
+          if (qSubmit) qSubmit.disabled = false;
+          alert('There was a problem submitting your quote request. Please try again.');
+        }
+      });
+
+      showStep(0);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>
