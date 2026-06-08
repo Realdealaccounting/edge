@@ -1030,3 +1030,24 @@ window.addEventListener('scroll', function () {
   }
 });
 </script>
+ const response = await fetch(quoteForm.action, {
+      method: "POST",
+      body: data,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      quoteForm.innerHTML = `
+        <div class="success-message">
+          <h3>Thank you!</h3>
+          <p>Your quote request has been submitted successfully.</p>
+        </div>
+      `;
+    } else {
+      alert("There was a problem submitting the quote form.");
+    }
+  });
+}
+</script>
