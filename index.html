@@ -992,20 +992,29 @@
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <script type="text/babel" src="tweaks-panel.jsx"></script>
 <script type="text/babel" src="tweaks-app.jsx"></script>
-</body>
-</html>
+    ```html
 <script>
 window.addEventListener('scroll', function () {
   const nav = document.querySelector('.nav');
 
-  if (window.scrollY > 50) {
-    nav.classList.add('scrolled');
-  } else {
-    nav.classList.remove('scrolled');
+  if (nav) {
+    if (window.scrollY > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
   }
 });
-</script>
- const response = await fetch(quoteForm.action, {
+
+const contactForm = document.getElementById("contactForm");
+
+if (contactForm) {
+  contactForm.addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const data = new FormData(contactForm);
+
+    const response = await fetch(contactForm.action, {
       method: "POST",
       body: data,
       headers: {
@@ -1014,15 +1023,66 @@ window.addEventListener('scroll', function () {
     });
 
     if (response.ok) {
+      contactForm.style.display = "none";
+
+      const successBox = document.querySelector(".form-success");
+      if (successBox) {
+        successBox.style.display = "block";
+      }
+
+    } else {
+      alert("There was a problem submitting the contact form.");
+    }
+  });
+}
+
+const quoteForm = document.getElementById("quoteForm");
+const qNext = document.getElementById("qNext");
+
+if (quoteForm && qNext) {
+
+  qNext.addEventListener("click", function () {
+
+    const activePanel = document.querySelector(".qpanel.active");
+    const step = activePanel ? activePanel.getAttribute("data-panel") : null;
+
+    if (step === "3") {
+      quoteForm.requestSubmit();
+    }
+  });
+
+  quoteForm.addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    const data = new FormData(quoteForm);
+
+    const response = await fetch(quoteForm.action, {
+      method: "POST",
+      body: data,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+
       quoteForm.innerHTML = `
         <div class="success-message">
           <h3>Thank you!</h3>
           <p>Your quote request has been submitted successfully.</p>
         </div>
       `;
+
     } else {
+
       alert("There was a problem submitting the quote form.");
+
     }
   });
 }
 </script>
+```
+
+</body>
+</html>
