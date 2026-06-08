@@ -1045,12 +1045,9 @@ if (quoteForm && qNext) {
     const activePanel = document.querySelector(".qpanel.active");
     const step = activePanel ? activePanel.getAttribute("data-panel") : null;
 
-   if (step === "3") {
-
-  const goalsPanel = document.querySelector('.qpanel[data-panel="3"]');
-
-  if (goalsPanel && goalsPanel.classList.contains('active')) {
-    quoteForm.requestSubmit();
+if (step === "3") {
+  quoteForm.submit();
+}
   }
 
 }
