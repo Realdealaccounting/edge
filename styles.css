@@ -931,3 +931,33 @@ body.sharp .tw-avatar { border-radius: 8px; }
 .nav.scrolled .brand-logo.dark {
   display: block;
 }
+/* Mobile fix for hero animation */
+@media (max-width: 768px) {
+  .hero-visual,
+  .animation-wrapper,
+  .hero-animation {
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-visual img,
+  .hero-visual video,
+  .hero-visual lottie-player,
+  .animation-wrapper img,
+  .animation-wrapper video,
+  .animation-wrapper lottie-player,
+  .hero-animation img,
+  .hero-animation video,
+  .hero-animation lottie-player {
+    max-width: 90vw;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+  }
+}
