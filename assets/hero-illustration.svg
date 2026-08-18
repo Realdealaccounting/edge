@@ -1,0 +1,168 @@
+<svg viewBox="0 0 600 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Isometric illustration of a building, money, and a rising growth chart representing tax savings from cost segregation">
+  <defs>
+    <linearGradient id="glassTop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef3ff"></stop><stop offset="1" stop-color="#dbe6ff"></stop>
+    </linearGradient>
+    <linearGradient id="glassL" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c3d4f7"></stop><stop offset="1" stop-color="#9db6ee"></stop>
+    </linearGradient>
+    <linearGradient id="glassR" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#aec3f2"></stop><stop offset="1" stop-color="#8aa6e8"></stop>
+    </linearGradient>
+    <linearGradient id="glassTop2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f3f7ff"></stop><stop offset="1" stop-color="#e3ecff"></stop>
+    </linearGradient>
+    <linearGradient id="glassL2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d2e0fb"></stop><stop offset="1" stop-color="#b3c8f3"></stop>
+    </linearGradient>
+    <linearGradient id="glassR2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#bcd0f6"></stop><stop offset="1" stop-color="#9bb6ee"></stop>
+    </linearGradient>
+    <linearGradient id="arrowG" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#3b82f6"></stop><stop offset="1" stop-color="#8b5cf6"></stop>
+    </linearGradient>
+    <linearGradient id="barG" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#2563eb"></stop><stop offset="1" stop-color="#5b8cf6"></stop>
+    </linearGradient>
+    <linearGradient id="coinG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd666"></stop><stop offset="1" stop-color="#f4a93b"></stop>
+    </linearGradient>
+  </defs>
+
+  
+  <g stroke="#cdd8f0" stroke-width="2" fill="none" opacity=".7" stroke-linecap="round">
+    <path d="M70 150 v40 M70 165 l-14 -14 M70 175 l14 -14"></path>
+    <path d="M520 110 v44 M520 128 l-15 -15 M520 140 l15 -15"></path>
+    <path d="M548 230 v36 M548 244 l-13 -13 M548 254 l13 -13"></path>
+    <path d="M120 90 v34 M120 104 l-12 -12 M120 114 l12 -12"></path>
+  </g>
+  
+  <ellipse cx="300" cy="450" rx="240" ry="40" fill="#dde6f8" opacity=".55"></ellipse>
+
+  
+  <g>
+    
+    <polygon points="304,240 382,285 382,135 304,90" fill="url(#glassR)"></polygon>
+    
+    <polygon points="200,300 304,240 304,90 200,150" fill="url(#glassL)"></polygon>
+    
+    <polygon points="200,150 304,90 382,135 278,195" fill="url(#glassTop)"></polygon>
+    
+    <g stroke="#e9f0ff" stroke-width="2.4" opacity=".8">
+      <line x1="234" y1="280" x2="234" y2="130"></line>
+      <line x1="269" y1="260" x2="269" y2="110"></line>
+      <line x1="200" y1="225" x2="304" y2="165"></line>
+    </g>
+    
+    <g stroke="#dbe6fb" stroke-width="2.4" opacity=".75">
+      <line x1="330" y1="105" x2="330" y2="255"></line>
+      <line x1="356" y1="120" x2="356" y2="270"></line>
+      <line x1="304" y1="165" x2="382" y2="210"></line>
+    </g>
+    
+    <g transform="translate(238,150)">
+      <rect x="-13" y="-12" width="26" height="22" rx="5" fill="#fff" stroke="#cdd8f0" stroke-width="1.5"></rect>
+      <text x="0" y="4" font-family="Sora, sans-serif" font-size="14" font-weight="700" fill="#2563eb" text-anchor="middle">$</text>
+    </g>
+  </g>
+
+  
+  <g>
+    <polygon points="383,312 451,351 451,256 383,217" fill="url(#glassR2)"></polygon>
+    <polygon points="300,360 383,312 383,217 300,265" fill="url(#glassL2)"></polygon>
+    <polygon points="300,265 383,217 451,256 368,304" fill="url(#glassTop2)"></polygon>
+    <g stroke="#eef3ff" stroke-width="2.2" opacity=".8">
+      <line x1="328" y1="343" x2="328" y2="248"></line>
+      <line x1="356" y1="327" x2="356" y2="232"></line>
+    </g>
+    <g stroke="#e1eafc" stroke-width="2.2" opacity=".7">
+      <line x1="406" y1="230" x2="406" y2="325"></line>
+      <line x1="428" y1="242" x2="428" y2="337"></line>
+    </g>
+    <g transform="translate(405,266)">
+      <rect x="-12" y="-11" width="24" height="20" rx="5" fill="#fff" stroke="#cdd8f0" stroke-width="1.5"></rect>
+      <text x="0" y="4" font-family="Sora, sans-serif" font-size="13" font-weight="700" fill="#2563eb" text-anchor="middle">$</text>
+    </g>
+  </g>
+
+  
+  <g transform="translate(64,372)">
+    <g>
+      <polygon points="0,18 64,-18 100,0 36,36" fill="#7fd6a4"></polygon>
+      <polygon points="0,18 36,36 36,46 0,28" fill="#4fb985"></polygon>
+      <polygon points="36,36 100,0 100,10 36,46" fill="#3fa876"></polygon>
+    </g>
+    <g transform="translate(0,-12)">
+      <polygon points="0,18 64,-18 100,0 36,36" fill="#93e0b4"></polygon>
+      <polygon points="0,18 36,36 36,46 0,28" fill="#5cc593"></polygon>
+      <polygon points="36,36 100,0 100,10 36,46" fill="#4cb583"></polygon>
+    </g>
+    <g transform="translate(0,-24)">
+      <polygon points="0,18 64,-18 100,0 36,36" fill="#a7e9c4"></polygon>
+      <polygon points="0,18 36,36 36,46 0,28" fill="#5cc593"></polygon>
+      <polygon points="36,36 100,0 100,10 36,46" fill="#4cb583"></polygon>
+      <circle cx="50" cy="9" r="11" fill="none" stroke="#2f9d6e" stroke-width="2.2"></circle>
+      <text x="50" y="14" font-family="Sora, sans-serif" font-size="13" font-weight="700" fill="#2f9d6e" text-anchor="middle">$</text>
+    </g>
+  </g>
+
+  
+  <g transform="translate(250,418)">
+    <g>
+      <ellipse cx="0" cy="14" rx="34" ry="18" fill="#d98c28"></ellipse>
+      <ellipse cx="0" cy="8" rx="34" ry="18" fill="url(#coinG)"></ellipse>
+      <ellipse cx="0" cy="8" rx="24" ry="12" fill="none" stroke="#e8a93c" stroke-width="2"></ellipse>
+      <text x="0" y="14" font-family="Sora, sans-serif" font-size="17" font-weight="700" fill="#c07b1f" text-anchor="middle">$</text>
+    </g>
+    <g transform="translate(46,16)">
+      <ellipse cx="0" cy="14" rx="30" ry="16" fill="#d98c28"></ellipse>
+      <ellipse cx="0" cy="9" rx="30" ry="16" fill="url(#coinG)"></ellipse>
+      <text x="0" y="14" font-family="Sora, sans-serif" font-size="15" font-weight="700" fill="#c07b1f" text-anchor="middle">$</text>
+    </g>
+  </g>
+
+  
+  <g transform="translate(440,300)">
+    
+    <g>
+      <polygon points="0,150 22,138 22,108 -22,130 -22,160 0,150" fill="url(#barG)" opacity=".55"></polygon>
+      <rect x="-2" y="92" width="26" height="58" rx="3" fill="url(#barG)"></rect>
+      <rect x="30" y="68" width="26" height="82" rx="3" fill="url(#barG)"></rect>
+      <rect x="62" y="40" width="26" height="110" rx="3" fill="url(#barG)"></rect>
+    </g>
+    
+    <path d="M-46 132 C -10 120, 18 96, 60 24" fill="none" stroke="url(#arrowG)" stroke-width="9" stroke-linecap="round"></path>
+    <path d="M44 12 L74 8 L66 40 Z" fill="url(#arrowG)"></path>
+  </g>
+
+  
+  <g transform="translate(150,330)">
+    <ellipse cx="2" cy="118" rx="34" ry="9" fill="#cdd8f0" opacity=".7"></ellipse>
+    
+    <path d="M-8 70 L-12 110 L-4 110 L0 76 Z" fill="#2a3566"></path>
+    <path d="M8 70 L12 110 L20 110 L14 76 Z" fill="#33407a"></path>
+    
+    <path d="M-14 30 Q2 22 16 30 L18 72 L-16 72 Z" fill="#f1f4fb"></path>
+    <path d="M-6 26 L8 26 L14 70 L-12 70 Z" fill="#ec4d3d"></path>
+    
+    <path d="M-14 34 L-26 56 L-20 60 L-9 40 Z" fill="#f1f4fb"></path>
+    <path d="M16 34 L28 52 L23 57 L11 40 Z" fill="#f1f4fb"></path>
+    
+    <circle cx="1" cy="12" r="11" fill="#f6c9a8"></circle>
+    <path d="M-10 9 Q-9 -2 1 -2 Q11 -2 12 9 Q6 4 1 5 Q-5 4 -10 9 Z" fill="#1d2a4d"></path>
+    
+    <g transform="translate(-34,52) rotate(-12)">
+      <rect x="-9" y="-12" width="20" height="26" rx="3" fill="#fff" stroke="#9db0d6" stroke-width="1.6"></rect>
+      <rect x="-4" y="-15" width="10" height="6" rx="2" fill="#2563eb"></rect>
+      <line x1="-5" y1="-4" x2="6" y2="-4" stroke="#cbd5e6" stroke-width="1.6"></line>
+      <line x1="-5" y1="2" x2="6" y2="2" stroke="#cbd5e6" stroke-width="1.6"></line>
+      <line x1="-5" y1="8" x2="2" y2="8" stroke="#cbd5e6" stroke-width="1.6"></line>
+    </g>
+    
+    <g transform="translate(30,58)">
+      <rect x="-12" y="-9" width="26" height="20" rx="3" fill="#33407a"></rect>
+      <rect x="-4" y="-14" width="10" height="6" rx="2" fill="none" stroke="#33407a" stroke-width="2.4"></rect>
+      <line x1="-12" y1="0" x2="14" y2="0" stroke="#27305e" stroke-width="2"></line>
+    </g>
+  </g>
+</svg>

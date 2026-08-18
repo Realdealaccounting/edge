@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cost Segregation | Explainer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#1c2350; --blue:#3b82f6; --blue2:#2563eb; --violet:#8b5cf6; --violet2:#7c4dff;
+    --amber:#f4a93b; --green:#34b87d; --muted:#6b7390;
+  }
+  *{box-sizing:border-box; margin:0;}
+  html,body{height:100%;}
+  body{font-family:"Sora",system-ui,sans-serif; background:transparent; height:100%; overflow:hidden; position:relative;}
+
+  .stage{
+    position:absolute; left:50%; top:50%; width:760px; height:470px;
+    transform-origin:center center; transform:translate(-50%,-50%);
+    background:
+      radial-gradient(520px 300px at 50% 36%, #ffffff, #fbfbff 70%, #f4f3fb 100%);
+    border-radius:22px; overflow:hidden;
+  }
+  /* faint ruled board */
+  .stage::before{content:""; position:absolute; inset:0; opacity:.5;
+    background-image:linear-gradient(rgba(124,92,246,.05) 1px, transparent 1px);
+    background-size:100% 38px;}
+
+  .scene{position:absolute; inset:0; opacity:0; transition:opacity .45s ease; display:grid; align-content:center; justify-items:center;}
+  .scene.active{opacity:1;}
+  .art{position:relative;}
+
+  /* captions */
+  .cap{position:absolute; left:0; right:0; bottom:42px; text-align:center; padding:0 52px;}
+  .cap .kick{display:inline-flex; align-items:center; gap:11px; font-weight:700; font-size:12.5px;
+    letter-spacing:.2em; text-transform:uppercase; color:var(--violet); margin-bottom:13px;}
+  .cap .kick::before,.cap .kick::after{content:""; width:22px; height:2px; border-radius:2px; background:linear-gradient(90deg,var(--blue),var(--violet));}
+  .cap .main{font-weight:600; color:var(--ink); font-size:22px; line-height:1.36; letter-spacing:-.015em; max-width:30ch; margin-inline:auto;}
+  .cap .main b{color:var(--blue2); font-weight:700;}
+
+  .dots{position:absolute; top:22px; left:50%; transform:translateX(-50%); display:flex; gap:8px; z-index:5;}
+  .dots i{width:7px;height:7px;border-radius:50%;background:#dcdfee;transition:all .35s ease;}
+  .dots i.on{background:var(--violet); width:22px; border-radius:6px;}
+
+  /* draw-on: marker drawing a stroke */
+  [data-draw]{stroke-dasharray:100; stroke-dashoffset:100;}
+  .scene.active [data-draw]{animation-name:draw; animation-duration:var(--d,1.2s); animation-timing-function:linear; animation-delay:var(--delay,0s); animation-fill-mode:forwards;}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+
+
+
+  /* gentle build-ins for fills/labels */
+  .pop{opacity:0; transform:scale(.9);}
+  .scene.active .pop{animation-name:pop;animation-duration:.5s;animation-timing-function:cubic-bezier(.22,.9,.3,1);animation-delay:var(--delay,0s);animation-fill-mode:forwards;}
+  @keyframes pop{to{opacity:1; transform:scale(1);}}
+  .rise{opacity:0; transform:translateY(13px);}
+  .scene.active .rise{animation-name:rise;animation-duration:.55s;animation-timing-function:cubic-bezier(.3,.7,.2,1);animation-delay:var(--delay,0s);animation-fill-mode:forwards;}
+  @keyframes rise{to{opacity:1; transform:none;}}
+  .fade{opacity:0;}
+  .scene.active .fade{animation-name:fade;animation-duration:.6s;animation-timing-function:ease;animation-delay:var(--delay,0s);animation-fill-mode:forwards;}
+  @keyframes fade{to{opacity:1;}}
+
+  .scene.active .crawlx{animation:crawlx 2.6s cubic-bezier(.45,0,.55,1) 1s forwards;}
+  @keyframes crawlx{from{transform:translateX(0);}to{transform:translateX(360px);}}
+
+  .scene.active .drop{animation-name:drop;animation-duration:.7s;animation-timing-function:cubic-bezier(.3,.7,.2,1);animation-delay:var(--delay,0s);animation-fill-mode:forwards; opacity:0;}
+  @keyframes drop{0%{opacity:0;transform:translateY(-58px) scale(.7);}70%{opacity:1;}100%{opacity:1;transform:translateY(0) scale(1);}}
+
+  .t-title{font-weight:800; font-size:42px; color:var(--ink); letter-spacing:-.025em; text-align:center; line-height:1.05;}
+  .t-sub{font-weight:500; font-size:18px; color:var(--muted); text-align:center; margin-top:14px;}
+  .brand-pill{display:inline-flex; align-items:center; gap:9px; padding:7px 15px; border-radius:999px;
+    background:linear-gradient(100deg,var(--blue),var(--violet)); color:#fff; font-weight:700; font-size:11.5px; letter-spacing:.18em; text-transform:uppercase;}
+
+  @media (prefers-reduced-motion: reduce){[data-draw]{stroke-dashoffset:0;} .pop,.rise,.fade,.drop{opacity:1;transform:none;} .nib,.nibring{display:none;}}
+</style>
+</head>
+<body>
+  <div class="stage" id="stage">
+    <div class="dots" id="dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+    <!-- S0 intro -->
+    <div class="scene s0 active">
+      <div class="art" style="display:grid;justify-items:center;gap:16px;">
+        <div class="brand-pill rise">EdgeCostSeg · Explainer</div>
+        <div class="t-title rise" style="--delay:.1s">Cost segregation,<br>on a whiteboard.</div>
+        <svg width="240" height="16" viewBox="0 0 240 16" fill="none" style="overflow:visible;">
+          <path data-draw pathLength="100" d="M8 9 C70 2 170 2 232 9" stroke="url(#ig)" stroke-width="4" stroke-linecap="round" style="--len:240;--d:1s;--delay:.5s;"/>
+          <defs><linearGradient id="ig" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+        </svg>
+        <div class="t-sub fade" style="--delay:1.1s">A clear, 30-second overview.</div>
+      </div>
+    </div>
+
+    <!-- S1 building -->
+    <div class="scene s1">
+      <div class="art">
+        <svg width="240" height="216" viewBox="0 0 240 216" fill="none" style="overflow:visible;">
+          <path data-draw pathLength="100" d="M28 190 L40 190 L40 40 L150 40 L190 64 L190 190 L208 190" stroke="#1c2350" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" style="--len:470;--d:1.4s;"/>
+          <rect class="pop" x="58" y="64" width="26" height="26" rx="3" fill="#cfe0fb" style="--delay:1.4s"/>
+          <rect class="pop" x="104" y="64" width="26" height="26" rx="3" fill="#cfe0fb" style="--delay:1.55s"/>
+          <rect class="pop" x="58" y="106" width="26" height="26" rx="3" fill="#cfe0fb" style="--delay:1.7s"/>
+          <rect class="pop" x="104" y="106" width="26" height="26" rx="3" fill="#cfe0fb" style="--delay:1.85s"/>
+          <rect class="pop" x="84" y="150" width="26" height="40" rx="3" fill="#b7a7ef" style="--delay:2s"/>
+        </svg>
+      </div>
+      <div class="cap"><div class="kick rise" style="--delay:.2s">The asset</div><div class="main rise" style="--delay:.3s">You own income-producing real estate.</div></div>
+    </div>
+
+    <!-- S2 default depreciation -->
+    <div class="scene s2">
+      <div class="art" style="width:520px;">
+        <svg width="520" height="150" viewBox="0 0 520 150" fill="none" style="overflow:visible;">
+          <path data-draw pathLength="100" d="M30 80 L484 80" stroke="#e0e3f0" stroke-width="8" stroke-linecap="round" style="--len:460;--d:1.2s;"/>
+          <path data-draw pathLength="100" d="M484 80 L470 72 M484 80 L470 88" stroke="#1c2350" stroke-width="4" stroke-linecap="round" style="--len:40;--d:.3s;--delay:1.2s;"/>
+          <text class="fade" x="30" y="116" font-family="Sora" font-size="14" font-weight="600" fill="#6b7390" style="--delay:.3s">Year 1</text>
+          <text class="fade" x="442" y="116" font-family="Sora" font-size="14" font-weight="600" fill="#6b7390" style="--delay:1.1s">Year 39</text>
+          <g class="crawlx"><circle cx="42" cy="52" r="11" fill="#f4a93b"/><text x="42" y="57" font-family="Sora" font-size="12" font-weight="700" fill="#a96a16" text-anchor="middle">$</text></g>
+        </svg>
+      </div>
+      <div class="cap"><div class="kick rise" style="--delay:.2s">The default</div><div class="main rise" style="--delay:.3s">Standard depreciation spreads the deduction thin, across <b>39 years.</b></div></div>
+    </div>
+
+    <!-- S3 breakdown -->
+    <div class="scene s3">
+      <div class="art" style="display:flex;align-items:center;gap:28px;">
+        <svg width="170" height="184" viewBox="0 0 170 184" fill="none" style="overflow:visible;">
+          <path data-draw pathLength="100" d="M26 165 L26 36 L96 36 L124 54 L124 165 L16 165" stroke="#1c2350" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" style="--len:430;--d:1.1s;"/>
+          <path data-draw pathLength="100" d="M96 36 L96 165 M96 54 L124 54" stroke="#1c2350" stroke-width="3" stroke-linecap="round" style="--len:160;--d:.6s;--delay:1s;"/>
+          <!-- magnifier draws -->
+          <g style="--d:.9s;--delay:.7s;">
+            <circle data-draw pathLength="100" cx="120" cy="92" r="24" stroke="#8b5cf6" stroke-width="4" style="--len:151;--d:.9s;--delay:.7s;"/>
+            <path data-draw pathLength="100" d="M138 110 L154 126" stroke="#8b5cf6" stroke-width="5" stroke-linecap="round" style="--len:24;--d:.3s;--delay:1.5s;"/>
+          </g>
+          <!-- focus is the magnifier in this scene -->
+        </svg>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;">
+          <div class="pop" style="--delay:1.7s;display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #e2e8f4;border-radius:12px;padding:9px 13px;box-shadow:0 6px 16px -8px rgba(20,17,49,.25);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f4a93b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12c.7.6 1 1.2 1 2h6c0-.8.3-1.4 1-2a7 7 0 0 0-4-12z"/></svg>
+            <span style="font-weight:600;font-size:14px;color:#1c2350;">Lighting</span>
+          </div>
+          <div class="pop" style="--delay:1.9s;display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #e2e8f4;border-radius:12px;padding:9px 13px;box-shadow:0 6px 16px -8px rgba(20,17,49,.25);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 9v12"/></svg>
+            <span style="font-weight:600;font-size:14px;color:#1c2350;">Flooring</span>
+          </div>
+          <div class="pop" style="--delay:2.1s;display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #e2e8f4;border-radius:12px;padding:9px 13px;box-shadow:0 6px 16px -8px rgba(20,17,49,.25);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 12h18M12 4v16"/></svg>
+            <span style="font-weight:600;font-size:14px;color:#1c2350;">Cabinetry</span>
+          </div>
+          <div class="pop" style="--delay:2.3s;display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #e2e8f4;border-radius:12px;padding:9px 13px;box-shadow:0 6px 16px -8px rgba(20,17,49,.25);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#34b87d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12M12 12c0-3 2-5 5-5M12 12c0-3-2-5-5-5M5 19h14"/></svg>
+            <span style="font-weight:600;font-size:14px;color:#1c2350;">Landscaping</span>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><div class="kick rise" style="--delay:.2s">The study</div><div class="main rise" style="--delay:.3s">An engineering study separates the building into its <b>components.</b></div></div>
+    </div>
+
+    <!-- S4 buckets -->
+    <div class="scene s4">
+      <div class="art" style="display:flex;align-items:flex-end;gap:34px;">
+        <div style="text-align:center;">
+          <div class="drop" style="--delay:.4s;margin:0 auto 10px;width:54px;height:54px;border-radius:14px;background:linear-gradient(180deg,#5b8cf6,#3b82f6);display:grid;place-items:center;box-shadow:0 12px 22px -10px rgba(37,99,235,.6);"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12c.7.6 1 1.2 1 2h6c0-.8.3-1.4 1-2a7 7 0 0 0-4-12z"/></svg></div>
+          <svg width="96" height="74" viewBox="0 0 96 74" style="overflow:visible;"><path data-draw pathLength="100" d="M3 2 L3 60 a8 8 0 0 0 8 8 L85 68 a8 8 0 0 0 8 -8 L93 2" stroke="#8b5cf6" stroke-width="3.5" fill="#f3f0fd" style="--len:230;--d:.7s;--delay:.5s;"/><text class="pop" x="48" y="48" font-family="Sora" font-size="26" font-weight="800" fill="#1c2350" text-anchor="middle" style="--delay:1.1s">5</text></svg>
+          <div class="fade" style="--delay:1.2s;font-weight:600;color:#6b7390;font-size:13px;margin-top:6px;letter-spacing:.04em;">YEARS</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="drop" style="--delay:.65s;margin:0 auto 10px;width:54px;height:54px;border-radius:14px;background:linear-gradient(180deg,#7a76e8,#8b5cf6);display:grid;place-items:center;box-shadow:0 12px 22px -10px rgba(139,92,246,.6);"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 12h18M12 4v16"/></svg></div>
+          <svg width="96" height="74" viewBox="0 0 96 74" style="overflow:visible;"><path data-draw pathLength="100" d="M3 2 L3 60 a8 8 0 0 0 8 8 L85 68 a8 8 0 0 0 8 -8 L93 2" stroke="#8b5cf6" stroke-width="3.5" fill="#f3f0fd" style="--len:230;--d:.7s;--delay:.75s;"/><text class="pop" x="48" y="48" font-family="Sora" font-size="26" font-weight="800" fill="#1c2350" text-anchor="middle" style="--delay:1.35s">7</text></svg>
+          <div class="fade" style="--delay:1.45s;font-weight:600;color:#6b7390;font-size:13px;margin-top:6px;letter-spacing:.04em;">YEARS</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="drop" style="--delay:.9s;margin:0 auto 10px;width:54px;height:54px;border-radius:14px;background:linear-gradient(180deg,#3fc78c,#34b87d);display:grid;place-items:center;box-shadow:0 12px 22px -10px rgba(52,184,125,.6);"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12M12 12c0-3 2-5 5-5M12 12c0-3-2-5-5-5M5 19h14"/></svg></div>
+          <svg width="96" height="74" viewBox="0 0 96 74" style="overflow:visible;"><path data-draw pathLength="100" d="M3 2 L3 60 a8 8 0 0 0 8 8 L85 68 a8 8 0 0 0 8 -8 L93 2" stroke="#8b5cf6" stroke-width="3.5" fill="#f3f0fd" style="--len:230;--d:.7s;--delay:1s;"/><text class="pop" x="48" y="48" font-family="Sora" font-size="26" font-weight="800" fill="#1c2350" text-anchor="middle" style="--delay:1.6s">15</text></svg>
+          <div class="fade" style="--delay:1.7s;font-weight:600;color:#6b7390;font-size:13px;margin-top:6px;letter-spacing:.04em;">YEARS</div>
+        </div>
+      </div>
+      <div class="cap"><div class="kick rise" style="--delay:.2s">The reclassification</div><div class="main rise" style="--delay:.3s">Qualifying components move to <b>5-, 7-, and 15-year</b> schedules.</div></div>
+    </div>
+
+    <!-- S5 benefit -->
+    <div class="scene s5">
+      <div class="art" style="display:flex;align-items:flex-end;gap:26px;">
+        <svg width="130" height="150" viewBox="0 0 130 150" fill="none" style="overflow:visible;">
+          <path data-draw pathLength="100" d="M14 130 C40 120 60 96 96 30" stroke="#34b87d" stroke-width="7" stroke-linecap="round" style="--len:150;--d:1s;--delay:.3s;"/>
+          <path data-draw pathLength="100" d="M80 26 L104 22 L98 50" stroke="#34b87d" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none" style="--len:80;--d:.4s;--delay:1.3s;"/>
+        </svg>
+        <div style="display:grid;justify-items:center;gap:8px;">
+          <div class="rise" style="--delay:1s;display:flex;gap:6px;"><span class="coin">$</span><span class="coin">$</span><span class="coin">$</span></div>
+          <div class="rise" style="--delay:.7s;display:flex;gap:6px;"><span class="coin">$</span><span class="coin">$</span><span class="coin">$</span><span class="coin">$</span></div>
+          <div class="rise" style="--delay:.4s;display:flex;gap:6px;"><span class="coin">$</span><span class="coin">$</span><span class="coin">$</span><span class="coin">$</span><span class="coin">$</span></div>
+        </div>
+      </div>
+      <div class="cap"><div class="kick rise" style="--delay:.2s">The benefit</div><div class="main rise" style="--delay:.3s">Larger deductions now: <b>stronger cash flow today,</b> not decades out.</div></div>
+    </div>
+
+    <!-- S6 end -->
+    <div class="scene s6">
+      <div class="art" style="display:grid;justify-items:center;gap:18px;">
+        <div class="t-title rise">That's cost<br>segregation.</div>
+        <svg width="300" height="16" viewBox="0 0 300 16" fill="none" style="overflow:visible;">
+          <path data-draw pathLength="100" d="M8 9 C90 2 210 2 292 9" stroke="url(#ig2)" stroke-width="5" stroke-linecap="round" style="--len:300;--d:.9s;--delay:.5s;"/>
+          <defs><linearGradient id="ig2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+        </svg>
+        <div class="fade" style="--delay:1.2s;font-weight:500;font-size:18px;color:var(--muted);">Engineering-based. Audit-ready. Your money, sooner.</div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  (function(){
+    var stage = document.getElementById('stage');
+    var scenes = Array.prototype.slice.call(stage.querySelectorAll('.scene'));
+    var dots = Array.prototype.slice.call(document.querySelectorAll('#dots i'));
+    var dur = [3600, 4300, 4300, 4900, 4700, 4300, 3900];
+    var i = 0;
+    function show(){
+      scenes.forEach(function(s){ s.classList.remove('active'); });
+      dots.forEach(function(d){ d.classList.remove('on'); });
+      scenes[i].classList.add('active');
+      if(dots[i]) dots[i].classList.add('on');
+      var cur = dur[i];
+      i = (i + 1) % scenes.length;
+      setTimeout(show, cur);
+    }
+    setTimeout(show, 250);
+  })();
+  (function(){
+    var stageEl = document.getElementById('stage');
+    var W = 760, H = 470, last = 0;
+    function fit(){
+      var w = document.documentElement.clientWidth || window.innerWidth;
+      var h = document.documentElement.clientHeight || window.innerHeight;
+      if(!w || !h) return;
+      var s = Math.min(w / W, h / H);
+      if(s === last) return;
+      last = s;
+      // absolute + translate keeps the board centred even while it overflows
+      stageEl.style.transform = 'translate(-50%,-50%) scale(' + s + ')';
+    }
+    // Run synchronously. requestAnimationFrame does not fire while the iframe is
+    // offscreen (lazy-loaded), which previously left the board unscaled on mobile.
+    fit();
+    window.addEventListener('resize', fit);
+    window.addEventListener('orientationchange', fit);
+    window.addEventListener('pageshow', fit);
+    window.addEventListener('load', fit);
+    document.addEventListener('visibilitychange', fit);
+    if(window.ResizeObserver){ new ResizeObserver(fit).observe(document.documentElement); }
+    if(document.fonts && document.fonts.ready){ document.fonts.ready.then(fit); }
+    // belt-and-braces: a few early re-checks in case layout settles late
+    [50, 200, 600, 1500].forEach(function(t){ setTimeout(fit, t); });
+  })();
+  var st = document.createElement('style');
+  st.textContent = '.coin{width:30px;height:30px;border-radius:50%;background:linear-gradient(180deg,#ffe39a,#f4a93b);border:2px solid #e0962a;display:grid;place-items:center;font-family:Sora;font-weight:700;font-size:14px;color:#a96a16;box-shadow:0 4px 10px -4px rgba(160,110,30,.6);}';
+  document.head.appendChild(st);
+</script>
+</body>
+</html>
